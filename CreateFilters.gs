@@ -105,8 +105,7 @@ labelids.labels.forEach(function(a) {
         labelid = a
     }
 })
-//Logger.log(labelid);
-//Logger.log(labelid.id);
+
 // Create a new filter object (really just POD)
 var filter = Gmail.newFilter()
 
