@@ -21,8 +21,10 @@ function testMessages() {
   // Wrap the entire function in a try / catch, in case there is an error, log it.
   try {
     
-    // Get the most recent 100 threads in your inbox that are not already marked as from a contact
-    threads = GmailApp.search("in:inbox -label:Contact", 0, 100);
+    // Get the most recent 50 threads in your inbox that are not already marked as from a contact
+    // There is a 6 minute timeout on cloud apps scripts.  Checking 100 messages usually times out, so 
+    // lowered it to 50.
+    threads = GmailApp.search("in:inbox -label:Contact -label:Filtered", 0, 50);
     
     // If there are threads
     if (threads.length > 0) {
