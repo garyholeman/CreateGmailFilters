@@ -70,6 +70,8 @@ function testMessages() {
 // Gmail label ${labelName}
 function createToFilter(toAddress, labelName) {
 
+try 
+{
 // Lists all the filters for the user running the script, 'me'
 var labels = Gmail.Users.Settings.Filters.list('me')
 
@@ -80,6 +82,11 @@ labels.filter.forEach(function(l) {
         label = null
     }
 })
+}
+  catch (e) {
+    Logger.Log(e.ToString);
+  }
+  finally {
 // If the filter does exist, return
 if (label === null) return
 else { 
@@ -98,8 +105,8 @@ labelids.labels.forEach(function(a) {
         labelid = a
     }
 })
-Logger.log(labelid);
-Logger.log(labelid.id);
+//Logger.log(labelid);
+//Logger.log(labelid.id);
 // Create a new filter object (really just POD)
 var filter = Gmail.newFilter()
 
@@ -115,5 +122,6 @@ filter.action.addLabelIds = [labelid.id];
 
 // Add the filter to the user's ('me') settings
 Gmail.Users.Settings.Filters.create(filter, 'me')
+}
 }
 }
